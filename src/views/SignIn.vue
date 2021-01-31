@@ -17,8 +17,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import axios from "axios";
 import {mapActions} from 'vuex';
 export default {
   name: "SignIn",
@@ -36,7 +34,13 @@ export default {
       signIn: 'auth/signIn'
     }),
     submit(){
-      this.signIn(this.form);
+      this.signIn(this.form).then(() => {
+        this.$router.replace({
+          name: 'Dashboard',
+        }).catch(() => {
+          console.log('failed');
+        });
+      });
     }
   }
 };
@@ -62,22 +66,23 @@ export default {
 .input {
   width: 100%;
   border-radius: 6px;
-  border: 1px solid rgb(95, 171, 233);
+  border: 1px solid #0a00b6;
   padding: 8px 10px;
   outline: none;
   font-size: 16px;
 }
 .input:active, .input:focus {
-  border: 2px solid rgb(157, 195, 231);
+  border: 2px solid #0a00b6;
   padding: 7px 9px;
   outline: none;
 }
 .btn-signin {
-  background-color: rgb(59, 194, 235);
+  background-color: #0a00b6;
   padding: 10px 14px;
   border: 1px solid rgb(63, 172, 245);
   border-radius: 6px;
   outline: none;
+  color: white;
 }
 .btn-signin:hover {
   box-shadow: 4px 4px 4px  rgba(59, 194, 235, 0.5);
