@@ -56,13 +56,6 @@ export default {
       }).catch(({response}) => {
         this.errors = response.data.errors;
       });
-      // this.signIn(this.form).then(() => {
-      //   this.$router.replace({
-      //     name: 'Dashboard',
-      //   }).catch(() => {
-      //     console.log('failed');
-      //   });
-      // });
     }
   }
 };

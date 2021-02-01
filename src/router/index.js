@@ -31,6 +31,34 @@ const routes = [
         next();
       }
   },
+  {
+    path: "/product-add",
+    name: "ProductAdd",
+    component: () =>
+      import(/* webpackChunkName: "productAdd" */ "../views/ProductAdd.vue"),
+      beforeEnter: (to, from, next) => {
+        if(!store.getters['auth/authenticated']){
+          return next({
+            name: 'SignIn'
+          })
+        }
+        next();
+      }
+  },
+  {
+    path: "/product-edit/:id",
+    name: "ProductEdit",
+    component: () =>
+      import(/* webpackChunkName: "productEdit" */ "../views/ProductEdit.vue"),
+      beforeEnter: (to, from, next) => {
+        if(!store.getters['auth/authenticated']){
+          return next({
+            name: 'SignIn'
+          })
+        }
+        next();
+      }
+  },
 ];
 
 const router = new VueRouter({
