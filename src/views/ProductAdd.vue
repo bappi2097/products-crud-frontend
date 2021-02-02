@@ -6,18 +6,12 @@
       </ul>
     </div>
     <div v-if="success">
-        <p class="success">{{success}}</p>
+      <p class="success">{{ success }}</p>
     </div>
     <form @submit.prevent="submit" class="form" enctype="multipart/form-data">
       <div class="form-group">
         <label class="label" for="title">Title</label>
-        <input
-          class="input"
-          type="text"
-          name="title"
-          v-model="form.title"
-          
-        />
+        <input class="input" type="text" name="title" v-model="form.title" />
       </div>
       <div class="form-group">
         <label class="label" for="description">Description</label>
@@ -30,13 +24,7 @@
       </div>
       <div class="form-group">
         <label class="label" for="price">Price</label>
-        <input
-          class="input"
-          type="number"
-          name="price"
-          v-model="form.price"
-          
-        />
+        <input class="input" type="number" name="price" v-model="form.price" />
       </div>
       <div class="form-group">
         <label class="label" for="image">Image</label>
@@ -49,7 +37,7 @@
       </div>
 
       <div class="form-group">
-        <button class="btn-signup">Save</button>
+        <button class="btn-save">Save</button>
       </div>
     </form>
   </div>
@@ -74,26 +62,26 @@ export default {
   },
   methods: {
     async submit() {
-        let formData = new FormData();
-        formData.append('title', this.form.title);
-        formData.append('description', this.form.description);
-        formData.append('price', this.form.price);
-        formData.append('image', this.form.image);
+      let formData = new FormData();
+      formData.append("title", this.form.title);
+      formData.append("description", this.form.description);
+      formData.append("price", this.form.price);
+      formData.append("image", this.form.image);
       await axios
         .post("products", formData, {
           headers: {
-            "Authorization" : `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
-            if (response.data.status == 201) {
-                this.success = response.data.message;
-                this.form.title = null;
-                this.form.description = null;
-                this.form.price = null;
-                this.form.image = null;
-            }
+          if (response.data.status == 201) {
+            this.success = response.data.message;
+            this.form.title = null;
+            this.form.description = null;
+            this.form.price = null;
+            this.form.image = null;
+          }
         })
         .catch(({ response }) => {
           this.errors = response;
@@ -139,7 +127,7 @@ export default {
   padding: 7px 9px;
   outline: none;
 }
-.btn-signup {
+.btn-save {
   background-color: #0a00b6;
   padding: 10px 14px;
   border: 1px solid #0a00b6;
